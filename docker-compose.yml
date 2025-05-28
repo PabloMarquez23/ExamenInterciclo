@@ -1,0 +1,16 @@
+version: '3.9'
+
+services:
+  websocket:
+    build: ./websocket-service
+    ports:
+      - "8765:8765"
+    restart: unless-stopped
+
+  angular:
+    build: ./angular-app
+    ports:
+      - "8080:80"
+    depends_on:
+      - websocket
+    restart: unless-stopped
