@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: universidades-deployment
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: universidades
+  template:
+    metadata:
+      labels:
+        app: universidades
+    spec:
+      containers:
+        - name: universidades
+          image: pablomar23/universidades:latest
+          ports:
+            - containerPort: 8080
+          env:
+            - name: SPRING_DATASOURCE_URL
+              value: jdbc:postgresql://postgres-service:5432/prueba
+            - name: SPRING_DATASOURCE_USERNAME
+              value: postgres
+            - name: SPRING_DATASOURCE_PASSWORD
+              value: "23052003"
